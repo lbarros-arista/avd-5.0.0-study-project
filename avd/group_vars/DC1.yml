@@ -41,7 +41,7 @@ l3leaf:
     # Offset all assigned loopback IP addresses.
     # Required when the < loopback_ipv4_pool > is same for 2 different node_types (like spine and l3leaf) to avoid over-lapping IPs.
     # For example, set the minimum offset l3leaf.defaults.loopback_ipv4_offset: < total # spine switches > or vice versa.
-    loopback_ipv4_offset: 2
+    loopback_ipv4_offset: 3
     # Definition of pool of IPs to be used as Virtual Tunnel EndPoint (VXLAN origin and destination IPs)
     vtep_loopback_ipv4_pool: 10.255.1.0/27
     # Ansible hostname of the devices used to establish neighborship (IP assignments and BGP peering)
