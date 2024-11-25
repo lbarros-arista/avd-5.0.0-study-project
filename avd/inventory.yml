@@ -23,6 +23,8 @@ all:
                   ansible_host: 172.16.1.11
                 dc1-spine2:
                   ansible_host: 172.16.1.12
+                dc1-spine3:
+                  ansible_host: 172.16.1.13
             DC1_L3_LEAVES:
               hosts:
                 dc1-leaf1a:
