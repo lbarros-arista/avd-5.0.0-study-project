@@ -72,7 +72,7 @@ default_interfaces:
 
 # CloudVision Portal definitions
 # cvp_instance_ips:
-#   - 192.168.1.12
+#   - 172.16.1.2
 # terminattr_smashexcludes: "ale,flexCounter,hardware,kni,pulse,strata"
 # terminattr_ingestexclude: "/Sysdb/cell/1/agent,/Sysdb/cell/2/agent"
 # terminattr_disable_aaa: true
