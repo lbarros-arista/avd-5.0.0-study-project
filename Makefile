@@ -37,5 +37,5 @@ test: ## Test Topology
 	cd ${CURRENT_DIR}/avd; ansible-playbook playbooks/anta.yml
 
 .PHONY: test-api
-test-api: ## Test Topology
+test-api: ## Test API to device
 	curl --user ansible:ansible --data "$(COMMAND)" --insecure https://$(DEVICE):443/command-api
