@@ -35,3 +35,7 @@ deploy-cvp: ## Deploy AVD configs using eAPI
 .PHONY: test
 test: ## Test Topology
 	cd ${CURRENT_DIR}/avd; ansible-playbook playbooks/anta.yml
+
+.PHONY: test-api
+test-api: ## Test Topology
+	curl --user ansible:ansible --data "$(COMMAND)" --insecure https://$(DEVICE):443/command-api
