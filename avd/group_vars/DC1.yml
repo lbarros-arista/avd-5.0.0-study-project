@@ -11,6 +11,7 @@ spine:
     # Pool of IPv4 addresses to configure interface Loopback0 used for BGP EVPN sessions
     loopback_ipv4_pool: 10.255.0.0/27
     # ASN to be used by BGP
+    loopback_ipv6_pool: fc00:dead:beef:255::/64
     bgp_as: 65100
 
   # Definition of nodes contained in this group.
@@ -43,6 +44,8 @@ l3leaf:
     # For example, set the minimum offset l3leaf.defaults.loopback_ipv4_offset: < total # spine switches > or vice versa.
     loopback_ipv4_offset: 3
     # Definition of pool of IPs to be used as Virtual Tunnel EndPoint (VXLAN origin and destination IPs)
+    loopback_ipv6_pool: fc00:dead:beef:255::/64
+    loopback_ipv6_offset: 3
     vtep_loopback_ipv4_pool: 10.255.1.0/27
     # Ansible hostname of the devices used to establish neighborship (IP assignments and BGP peering)
     uplink_switches: ['dc1-spine1', 'dc1-spine2', 'dc1-spine3']
