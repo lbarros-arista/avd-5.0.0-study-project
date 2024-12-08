@@ -10,11 +10,11 @@ containerlab: ## Deploy ceos lab
 
 .PHONY: start
 start: ## Deploy ceos lab
-	sudo containerlab deploy --debug --topo $(CURRENT_DIR)/avd/intended/containerlab/containerlab.yml --max-workers 10 --timeout 5m --reconfigure
+	sudo containerlab deploy --debug --topo $(CURRENT_DIR)/avd/intended/containerlab/CLAB_topology.yml --max-workers 10 --timeout 5m --reconfigure
 
 .PHONY: stop
 stop: ## Destroy ceos lab
-	sudo containerlab destroy --debug --topo $(CURRENT_DIR)/avd/intended/containerlab/containerlab.yml --cleanup
+	sudo containerlab destroy --debug --topo $(CURRENT_DIR)/avd/intended/containerlab/CLAB_topology.yml --cleanup
 
 .PHONY: check-lab
 check-lab: ## check lab parameters
@@ -35,3 +35,7 @@ deploy-cvp: ## Deploy AVD configs using eAPI
 .PHONY: test
 test: ## Test Topology
 	cd ${CURRENT_DIR}/avd; ansible-playbook playbooks/anta.yml
+
+.PHONY: test-api
+test-api: ## Test API to device
+	curl --user ansible:ansible --data "$(COMMAND)" --insecure https://$(DEVICE):443/command-api

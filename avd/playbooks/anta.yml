@@ -11,3 +11,10 @@
         use_anta: true
         # To save catalogs
         save_catalog: true
+        skip_tests:
+          - category:
+            tests:
+              - VerifyEnvironmentPower
+              - VerifyTemperature
+              - VerifyEnvironmentCooling
+              - VerifyTransceiversManufacturers
