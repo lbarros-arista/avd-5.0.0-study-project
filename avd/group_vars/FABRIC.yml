@@ -18,6 +18,11 @@ ansible_httpapi_validate_certs: false
 # Common AVD group variables
 fabric_name: FABRIC
 
+custom_node_type_keys:
+  - key: host
+    type: host
+    uplink_type: port-channel
+
 # Generate CSVs with fabric link info.
 # eos_designs_documentation:
 #   topology_csv: true
@@ -68,9 +73,9 @@ default_interfaces:
     uplink_interfaces: [ Ethernet1-3 ]
     mlag_interfaces: [ Ethernet4-5 ]
     downlink_interfaces: [ Ethernet8 ]
-  - types: [ l2leaf ]
+  - types: [ host ]
     platforms: [ default ]
-    uplink_interfaces: [ Ethernet1-2 ]
+    uplink_interfaces: [ Ethernet1-4 ]
 
 # CloudVision Portal definitions
 # cvp_instance_ips:

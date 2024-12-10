@@ -49,7 +49,17 @@ all:
                   ansible_host: 172.16.1.103
                 dc1-leaf2b:
                   ansible_host: 172.16.1.104
-
+            HOSTS:
+              hosts:
+                host1a:
+                  ansible_host: 172.16.1.121
+                host1b:
+                  ansible_host: 172.16.1.122
+                host2a:
+                  ansible_host: 172.16.1.123
+                host2b:
+                  ansible_host: 172.16.1.124
+        
     NETWORK_SERVICES:
       children:
         DC1_L3_LEAVES:
