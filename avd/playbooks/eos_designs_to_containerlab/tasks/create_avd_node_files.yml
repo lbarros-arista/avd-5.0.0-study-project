@@ -1,0 +1,25 @@
+---
+# tasks file for avd nodes
+
+- name: Remove local containerlab output directories
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "{{ containerlab_dir }}"
+  delegate_to: localhost
+  run_once: true
+
+- name: Include device intended structure configuration variables
+  delegate_to: localhost
+  include_vars:
+    file: "{{ filename }}"
+  # errors='ignore' is needed for compatibility with ansible-core < 2.12
+  when: structured_config is not defined and lookup('first_found', filename, skip=True, errors='ignore')
+  vars:
+    filename: "{{ structured_dir }}/{{ inventory_hostname }}.yml"
+
+- name: Create simulation topology and other needed files
+  delegate_to: localhost
+  run_once: true
+  simulation:
