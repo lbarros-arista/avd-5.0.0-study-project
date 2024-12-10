@@ -1,34 +1,23 @@
 ---
-# Default gateway used for the management interface
 mgmt_gateway: 172.16.1.1
 
 # Spine switch group
 spine:
-  # Definition of default values that will be configured to all nodes defined in this group
   defaults:
-    # Set the relevant platform as each platform has different default values in Ansible AVD
     platform: ceos
     # Pool of IPv4 addresses to configure interface Loopback0 used for BGP EVPN sessions
     loopback_ipv4_pool: 10.255.0.0/27
     # Pool of IPv6 addresses to configure interface Loopback0 used for BGP EVPN sessions
     loopback_ipv6_pool: fc00:dead:beef:255::/64
-    # ASN to be used by BGP
     bgp_as: 65100
 
-  # Definition of nodes contained in this group.
-  # Specific configuration of device must take place under the node definition. Each node inherits all values defined under 'defaults'
   nodes:
-    # Name of the node to be defined (must be consistent with definition in inventory)
     - name: dc1-spine1
-      # Device ID definition. An integer number used for internal calculations (ie. IPv4 address of the loopback_ipv4_pool among others)
       id: 1
-      # Management IP to be assigned to the management interface
       mgmt_ip: 172.16.1.11/24
-
     - name: dc1-spine2
       id: 2
       mgmt_ip: 172.16.1.12/24
-
     - name: dc1-spine3
       id: 3
       mgmt_ip: 172.16.1.13/24
@@ -36,7 +25,6 @@ spine:
 # L3 Leaf switch group
 l3leaf:
   defaults:
-    # Set the relevant platform as each platform has different default values in Ansible AVD
     platform: ceos
     # Pool of IPv4 addresses to configure interface Loopback0 used for BGP EVPN sessions
     loopback_ipv4_pool: 10.255.0.0/27
@@ -62,20 +50,15 @@ l3leaf:
     spanning_tree_priority: 4096
     spanning_tree_mode: mstp
 
-  # If two nodes (and only two) are in the same node_group, they will automatically form an MLAG pair
   node_groups:
-    # Definition of a node group that will include two devices in MLAG.
-    # Definitions under the group will be inherited by both nodes in the group
     - group: RACK1
-      # ASN to be used by BGP for the group. Both devices in the MLAG pair will use the same BGP ASN
       bgp_as: 65101
+      filter:
+        tags: [ "RACK1" ]
       nodes:
-        # Definition of hostnames under the node_group
         - name: dc1-leaf1a
           id: 1
           mgmt_ip: 172.16.1.101/24
-          # Definition of the port to be used in the uplink device facing this device.
-          # Note that the number of elements in this list must match the length of 'uplink_switches' as well as 'uplink_interfaces'
           uplink_switch_interfaces:
             - Ethernet1
             - Ethernet1
@@ -89,6 +72,8 @@ l3leaf:
             - Ethernet2
 
     - group: RACK2
+      filter:
+        tags: [ "RACK2" ]
       bgp_as: 65102
       nodes:
         - name: dc1-leaf2a
