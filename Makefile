@@ -20,6 +20,10 @@ stop: ## Destroy ceos lab
 check-lab: ## check lab parameters
 	sudo containerlab inspect --name AVD
 
+.PHONY: graph-lab
+graph-lab: ## check lab parameters
+	sudo containerlab graph --topo $(CURRENT_DIR)/avd/intended/containerlab/CLAB_topology.yml
+
 .PHONY: build
 build: ## Generate AVD configs
 	cd ${CURRENT_DIR}/avd; ansible-playbook playbooks/build.yml
